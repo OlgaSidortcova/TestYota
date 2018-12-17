@@ -7,7 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +38,7 @@ public class ApplicationManager {
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/home/sadsido/Tools/firefox/firefox"));
     } else if (browser.equals(BrowserType.CHROME)) {
       wd = new ChromeDriver();
+
     }
     wd.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
     wd.get("http://localhost:4567/index.html");
@@ -55,16 +59,16 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
     WebElement button = wd.findElement(By.xpath("//div/div[2]/div[3]/div[2]/div/div/div/a"));
     String classes = button.getAttribute("class");
-    return  !classes.contains("disabled");
+    return !classes.contains("disabled");
   }
 
   public void IncreaseBalance() {
-
+    wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
     wd.findElement(By.xpath("//div[@class='actions']/a[1]")).click();
   }
 
   public String getBalance() {
-    wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
     return wd.findElement(By.xpath("//dd[@id='balance-holder']//span")).getText();
   }
 
@@ -95,11 +99,13 @@ public class ApplicationManager {
   }
 
   public void SliderIncrease() {
-    wd.findElement(By.xpath("//div/div[2]/div[2]/div[5]/a")).click();
+    wd.manage().timeouts().implicitlyWait(1200, TimeUnit.SECONDS);
+    wd.findElement(By.xpath("//div[@class='increase']/a[1]")).click();
   }
 
   public void SliderDecrease() {
-    wd.findElement(By.xpath("//div/div[2]/div[2]/div[2]/a")).click();
+    wd.manage().timeouts().implicitlyWait(1200, TimeUnit.SECONDS);
+    wd.findElement(By.xpath("//div[@class='decrease']/a[1]")).click();
   }
 
   public void stop() {
