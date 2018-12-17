@@ -1,26 +1,26 @@
 package com.sd.ts;
 
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
 
-//  protected static final ApplicationManager applicationManager = new ApplicationManager(BrowserType.FIREFOX);
-protected static final ApplicationManager applicationManager = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
+
+  protected static final ApplicationManager app = new
+          ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
+
   @BeforeSuite
   public void setUp() throws Exception {
-    applicationManager.init();
+    app.init();
   }
 
   @AfterSuite
   public void tearDown() {
-    applicationManager.stop();
+    app.stop();
   }
 
   public ApplicationManager getApplicationManager() {
-    return applicationManager;
+    return app;
   }
 }
